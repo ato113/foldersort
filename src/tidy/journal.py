@@ -41,6 +41,14 @@ def last_batch(journal: Path = JOURNAL_FILE) -> dict | None:
     return json.loads(lines[-1])
 
 
+def history(limit: int = 10, journal: Path = JOURNAL_FILE) -> list[dict]:
+    """Return the most recent batches, newest first."""
+    if not journal.is_file():
+        return []
+    lines = [line for line in journal.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return [json.loads(line) for line in reversed(lines[-limit:])]
+
+
 def drop_last(journal: Path = JOURNAL_FILE) -> None:
     """Remove the most recent batch from the journal."""
     if not journal.is_file():

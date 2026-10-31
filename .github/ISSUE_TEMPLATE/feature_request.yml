@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest a rule condition or an improvement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the situation, not just the feature. It often turns out there's already a way.
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help?
+      description: If you have a config snippet or command in mind, show it.
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: I've read the scope note in CONTRIBUTING.md and think this fits

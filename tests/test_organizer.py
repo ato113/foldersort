@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from tidy import organizer
@@ -122,3 +124,19 @@ def test_config_requires_rules(tmp_path):
     config_file.write_text("source: .\n", encoding="utf-8")
     with pytest.raises(ConfigError):
         Config.load(config_file)
+
+
+def test_exclude_patterns_are_skipped(tmp_path):
+    (tmp_path / "a.png").write_bytes(b"x")
+    (tmp_path / "half-downloaded.png.part").write_bytes(b"x")
+    (tmp_path / "b.png").write_bytes(b"x")
+
+    config = make_config(tmp_path, exclude=["*.part", "b.*"])
+    moves = organizer.plan(config)
+
+    assert [Path(m.source).name for m in moves] == ["a.png"]
+
+
+def test_exclude_defaults_to_nothing(tmp_path):
+    (tmp_path / "a.png").write_bytes(b"x")
+    assert len(organizer.plan(make_config(tmp_path))) == 1

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tidy-cli"
-version = "0.1.0"
+version = "0.2.0"
 description = "Organize a folder with rules you can read."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -28,6 +28,7 @@ dev = ["pytest>=7.0", "ruff>=0.4"]
 [project.urls]
 Homepage = "https://github.com/ato113/tidy"
 Issues = "https://github.com/ato113/tidy/issues"
+Changelog = "https://github.com/ato113/tidy/blob/main/CHANGELOG.md"
 
 [project.scripts]
 tidy = "tidy.cli:main"

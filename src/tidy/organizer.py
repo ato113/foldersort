@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import fnmatch
 import shutil
 from pathlib import Path
 
@@ -35,6 +36,8 @@ def plan(config: Config) -> list[Move]:
     moves: list[Move] = []
     for path in sorted(files):
         if not path.is_file() or path.name.startswith("."):
+            continue
+        if any(fnmatch.fnmatch(path.name, pattern) for pattern in config.exclude):
             continue
         # Never re-organize files that already sit in a target directory.
         if any(parent in target_dirs for parent in path.parents):

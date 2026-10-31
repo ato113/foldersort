@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
@@ -22,6 +22,7 @@ class Config:
     rules: list[Rule]
     recursive: bool = False
     on_conflict: str = "rename"  # rename | skip | overwrite
+    exclude: list[str] = field(default_factory=list)
 
     @classmethod
     def load(cls, path: Path) -> Config:
@@ -51,11 +52,16 @@ class Config:
         except RuleError as exc:
             raise ConfigError(str(exc)) from exc
 
+        exclude = raw.get("exclude", [])
+        if not isinstance(exclude, list):
+            raise ConfigError("'exclude' must be a list of glob patterns.")
+
         return cls(
             source=Path(raw["source"]).expanduser(),
             rules=rules,
             recursive=bool(raw.get("recursive", False)),
             on_conflict=on_conflict,
+            exclude=list(exclude),
         )
 
 
