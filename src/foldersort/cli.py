@@ -24,7 +24,7 @@ def _resolve_config(argument: str | None) -> Path:
     found = find_config()
     if found is None:
         raise ConfigError(
-            "No config file found. Create a tidy.yaml here, or run 'tidy init' to start from a sample."
+            "No config file found. Create a foldersort.yaml here, or run 'foldersort init' to start from a sample."
         )
     return found
 
@@ -67,7 +67,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 
     performed = organizer.apply(moves, config.on_conflict)
     journal.record(performed)
-    print(paint(f"\nMoved {len(performed)} file(s).", "green") + " Run 'tidy undo' to reverse this.")
+    print(paint(f"\nMoved {len(performed)} file(s).", "green") + " Run 'foldersort undo' to reverse this.")
     return 0
 
 
@@ -79,7 +79,7 @@ def cmd_undo(args: argparse.Namespace) -> int:
             return 0
         print(paint("Recent runs:", "bold") + "\n")
         for index, batch in enumerate(batches, start=1):
-            marker = paint("<- 'tidy undo' reverses this", "dim") if index == 1 else ""
+            marker = paint("<- 'foldersort undo' reverses this", "dim") if index == 1 else ""
             count = len(batch["moves"])
             print(f"  {batch['timestamp']}   {count:>3} file(s)  {marker}")
         return 0
@@ -105,7 +105,7 @@ def cmd_undo(args: argparse.Namespace) -> int:
 
 
 SAMPLE_CONFIG = """\
-# Where to tidy. Use ~ for your home directory.
+# Which folder to organize. Use ~ for your home directory.
 source: ~/Downloads
 
 # Look inside subdirectories too.
@@ -164,12 +164,12 @@ rules:
 
 
 def cmd_init(args: argparse.Namespace) -> int:
-    destination = Path(args.path or "tidy.yaml")
+    destination = Path(args.path or "foldersort.yaml")
     if destination.exists() and not args.force:
         print(f"{destination} already exists. Use --force to overwrite.")
         return 1
     destination.write_text(SAMPLE_CONFIG, encoding="utf-8")
-    print(f"Wrote {destination}. Edit it, then run 'tidy run --dry-run'.")
+    print(f"Wrote {destination}. Edit it, then run 'foldersort run --dry-run'.")
     return 0
 
 
@@ -188,7 +188,7 @@ def cmd_suggest(args: argparse.Namespace) -> int:
             return 1
         destination.write_text(suggest.to_config(source, suggestions), encoding="utf-8")
         print(f"Wrote {destination} with {len(suggestions)} rule(s).")
-        print("Review it, then run 'tidy run --dry-run'.")
+        print("Review it, then run 'foldersort run --dry-run'.")
         return 0
 
     print(paint(f"Found {len(suggestions)} rule(s) that would fit {source}:", "bold") + "\n")
@@ -196,16 +196,16 @@ def cmd_suggest(args: argparse.Namespace) -> int:
         print(f"  {paint(item.name, 'cyan')}  {paint(f'({item.count} file(s))', 'dim')}")
     print("\n" + paint("--- suggested config ---", "dim"))
     print(suggest.to_config(source, suggestions))
-    print(paint("Save it with: tidy suggest --write tidy.yaml", "dim"))
+    print(paint("Save it with: foldersort suggest --write foldersort.yaml", "dim"))
     return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="tidy",
+        prog="foldersort",
         description="Organize a folder with rules you can read.",
     )
-    parser.add_argument("--version", action="version", version=f"tidy {__version__}")
+    parser.add_argument("--version", action="version", version=f"foldersort {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     run = subparsers.add_parser("run", help="organize files according to the config")
@@ -222,12 +222,12 @@ def build_parser() -> argparse.ArgumentParser:
     sug = subparsers.add_parser("suggest", help="propose rules based on what is in a folder")
     sug.add_argument("source", nargs="?", help="folder to inspect (default: current directory)")
     sug.add_argument("-r", "--recursive", action="store_true", help="look inside subfolders")
-    sug.add_argument("-w", "--write", nargs="?", const="tidy.yaml", help="write the config to a file")
+    sug.add_argument("-w", "--write", nargs="?", const="foldersort.yaml", help="write the config to a file")
     sug.add_argument("-f", "--force", action="store_true", help="overwrite an existing file")
     sug.set_defaults(func=cmd_suggest)
 
     init = subparsers.add_parser("init", help="write a sample config file")
-    init.add_argument("path", nargs="?", help="where to write it (default: tidy.yaml)")
+    init.add_argument("path", nargs="?", help="where to write it (default: foldersort.yaml)")
     init.add_argument("-f", "--force", action="store_true", help="overwrite an existing file")
     init.set_defaults(func=cmd_init)
 
@@ -245,7 +245,7 @@ def main(argv: list[str] | None = None) -> int:
         print("\nCancelled.", file=sys.stderr)
         return 130
     except BrokenPipeError:
-        # The reader went away (e.g. `tidy run | head`). Silence the shutdown
+        # The reader went away (e.g. `foldersort run | head`). Silence the shutdown
         # warning Python would otherwise print when it flushes stdout.
         os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
         return 0

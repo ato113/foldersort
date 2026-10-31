@@ -1,6 +1,6 @@
 import io
 
-from tidy.ui import paint, supports_color
+from foldersort.ui import paint, supports_color
 
 
 class FakeTTY(io.StringIO):

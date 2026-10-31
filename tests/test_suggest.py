@@ -1,6 +1,6 @@
 import pytest
 
-from tidy import suggest
+from foldersort import suggest
 
 
 def test_groups_known_families(tmp_path):
@@ -54,12 +54,12 @@ def test_hidden_files_ignored(tmp_path):
 
 def test_generated_config_is_loadable(tmp_path):
     """The whole point: what suggest writes must parse back as a config."""
-    from tidy.config import Config
+    from foldersort.config import Config
 
     for name in ("a.png", "b.pdf", "Screenshot 1.png"):
         (tmp_path / name).write_bytes(b"x")
 
-    config_file = tmp_path / "tidy.yaml"
+    config_file = tmp_path / "foldersort.yaml"
     config_file.write_text(suggest.to_config(tmp_path, suggest.scan(tmp_path)), encoding="utf-8")
 
     config = Config.load(config_file)

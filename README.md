@@ -1,16 +1,16 @@
-# tidy
+# foldersort
 
 **Organize a folder with rules you can read.**
 
-[![CI](https://github.com/ato113/tidy/actions/workflows/ci.yml/badge.svg)](https://github.com/ato113/tidy/actions/workflows/ci.yml)
+[![CI](https://github.com/ato113/foldersort/actions/workflows/ci.yml/badge.svg)](https://github.com/ato113/foldersort/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-Your Downloads folder has 400 files in it. `tidy` sorts them into folders based on
+Your Downloads folder has 400 files in it. `foldersort` sorts them into folders based on
 a YAML file you write once — and puts everything back if you don't like the result.
 
 ```
-$ tidy run --dry-run
+$ foldersort run --dry-run
 
 12 file(s) to move:
 
@@ -25,47 +25,49 @@ Dry run — nothing was moved. Drop --dry-run to apply.
 ## Why another file organizer?
 
 Most of them hardcode the categories, so the moment your workflow differs from the
-author's you're out of luck. `tidy` has four things they usually miss:
+author's you're out of luck. `foldersort` has four things they usually miss:
 
-- **It writes the rules for you.** `tidy suggest` looks at what's actually in the
+- **It writes the rules for you.** `foldersort suggest` looks at what's actually in the
   folder and hands you a working config. No staring at a blank YAML file.
 - **Conditions combine.** A rule can match on extension *and* size *and* age at once —
   "PDFs larger than 50 MB that I haven't touched in six months" is one rule.
 - **Dry run by default in the docs.** You always see the plan before anything moves.
-- **Real undo.** Every run is journaled, so `tidy undo` puts every file back where it was.
+- **Real undo.** Every run is journaled, so `foldersort undo` puts every file back where it was.
 
 ## Install
 
 ```bash
-pip install tidy-cli
+pip install foldersort
 ```
+
+The command is `foldersort`, and `fsort` is a shorter alias for it.
 
 Or from source:
 
 ```bash
-git clone https://github.com/ato113/tidy
-cd tidy
+git clone https://github.com/ato113/foldersort
+cd foldersort
 pip install -e .
 ```
 
 ## Quick start
 
 ```bash
-tidy suggest ~/Downloads --write   # look at the folder, write a config for it
-tidy run --dry-run                 # see what would happen
-tidy run                           # do it (asks for confirmation)
-tidy undo                          # changed your mind
+foldersort suggest ~/Downloads --write   # look at the folder, write a config for it
+foldersort run --dry-run                 # see what would happen
+foldersort run                           # do it (asks for confirmation)
+foldersort undo                          # changed your mind
 ```
 
-Prefer to start from a blank slate? `tidy init` writes a commented sample config.
+Prefer to start from a blank slate? `foldersort init` writes a commented sample config.
 
-### Let tidy write the rules
+### Let foldersort write the rules
 
-`tidy suggest` scans a folder and proposes a rule for each group it finds — including
+`foldersort suggest` scans a folder and proposes a rule for each group it finds — including
 one for screenshots, which it recognises by name in several languages.
 
 ```
-$ tidy suggest ~/Downloads
+$ foldersort suggest ~/Downloads
 
 Found 6 rule(s) that would fit /home/you/Downloads:
 
@@ -77,7 +79,7 @@ Found 6 rule(s) that would fit /home/you/Downloads:
   BLEND files  (3 file(s))
 ```
 
-Add `--write` to save it as `tidy.yaml`. It's a normal config file — edit it freely.
+Add `--write` to save it as `foldersort.yaml`. It's a normal config file — edit it freely.
 
 ## Configuration
 
@@ -124,8 +126,8 @@ Conditions you leave out are ignored.
 
 - Hidden files (starting with `.`) are never touched.
 - Files already inside a target folder are left alone, so running twice is safe.
-- `tidy undo` reverses the most recent run only; `tidy undo --list` shows the history.
-  The journal lives in `~/.local/share/tidy/journal.jsonl`.
+- `foldersort undo` reverses the most recent run only; `foldersort undo --list` shows the history.
+  The journal lives in `~/.local/share/foldersort/journal.jsonl`.
 - Output is coloured when you're at a terminal and plain when you pipe it.
   `NO_COLOR=1` turns it off everywhere.
 

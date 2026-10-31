@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-JOURNAL_DIR = Path.home() / ".local" / "share" / "tidy"
+JOURNAL_DIR = Path.home() / ".local" / "share" / "foldersort"
 JOURNAL_FILE = JOURNAL_DIR / "journal.jsonl"
 
 

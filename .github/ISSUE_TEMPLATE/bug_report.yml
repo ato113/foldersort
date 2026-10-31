@@ -7,7 +7,7 @@ body:
     attributes:
       label: What happened?
       description: What did you run, what did you expect, and what did you get instead?
-      placeholder: I ran `tidy run` and ...
+      placeholder: I ran `foldersort run` and ...
     validations:
       required: true
 
@@ -15,15 +15,15 @@ body:
     id: config
     attributes:
       label: Your config
-      description: The relevant part of your tidy.yaml. Feel free to trim paths.
+      description: The relevant part of your foldersort.yaml. Feel free to trim paths.
       render: yaml
 
   - type: input
     id: version
     attributes:
-      label: tidy version
-      description: Output of `tidy --version`
-      placeholder: tidy 0.2.0
+      label: foldersort version
+      description: Output of `foldersort --version`
+      placeholder: foldersort 0.2.0
     validations:
       required: true
 

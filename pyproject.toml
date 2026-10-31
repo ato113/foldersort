@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "tidy-cli"
+name = "foldersort"
 version = "0.2.0"
 description = "Organize a folder with rules you can read."
 readme = "README.md"
@@ -26,15 +26,16 @@ dependencies = ["PyYAML>=6.0"]
 dev = ["pytest>=7.0", "ruff>=0.4"]
 
 [project.urls]
-Homepage = "https://github.com/ato113/tidy"
-Issues = "https://github.com/ato113/tidy/issues"
-Changelog = "https://github.com/ato113/tidy/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/ato113/foldersort"
+Issues = "https://github.com/ato113/foldersort/issues"
+Changelog = "https://github.com/ato113/foldersort/blob/main/CHANGELOG.md"
 
 [project.scripts]
-tidy = "tidy.cli:main"
+foldersort = "foldersort.cli:main"
+fsort = "foldersort.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/tidy"]
+packages = ["src/foldersort"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

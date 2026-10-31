@@ -4,7 +4,7 @@ from datetime import timedelta
 
 import pytest
 
-from tidy.rules import Rule, RuleError, _parse_age, _parse_size
+from foldersort.rules import Rule, RuleError, _parse_age, _parse_size
 
 
 @pytest.mark.parametrize(

@@ -9,7 +9,7 @@ import yaml
 
 from .rules import Rule, RuleError
 
-DEFAULT_CONFIG_NAMES = ("tidy.yaml", "tidy.yml", ".tidy.yaml")
+DEFAULT_CONFIG_NAMES = ("foldersort.yaml", "foldersort.yml", ".foldersort.yaml")
 
 
 class ConfigError(ValueError):

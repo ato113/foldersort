@@ -2,9 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from tidy import organizer
-from tidy.config import Config, ConfigError
-from tidy.rules import Rule
+from foldersort import organizer
+from foldersort.config import Config, ConfigError
+from foldersort.rules import Rule
 
 
 def make_config(tmp_path, **overrides):
@@ -111,7 +111,7 @@ def test_plan_rejects_missing_source(tmp_path):
 
 
 def test_config_rejects_unknown_conflict_policy(tmp_path):
-    config_file = tmp_path / "tidy.yaml"
+    config_file = tmp_path / "foldersort.yaml"
     config_file.write_text(
         "source: .\non_conflict: explode\nrules:\n  - name: X\n    target: X\n", encoding="utf-8"
     )
@@ -120,7 +120,7 @@ def test_config_rejects_unknown_conflict_policy(tmp_path):
 
 
 def test_config_requires_rules(tmp_path):
-    config_file = tmp_path / "tidy.yaml"
+    config_file = tmp_path / "foldersort.yaml"
     config_file.write_text("source: .\n", encoding="utf-8")
     with pytest.raises(ConfigError):
         Config.load(config_file)

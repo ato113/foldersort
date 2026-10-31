@@ -1,12 +1,12 @@
-# Contributing to tidy
+# Contributing to foldersort
 
 Thanks for taking the time to help. Issues and pull requests are both welcome.
 
 ## Getting set up
 
 ```bash
-git clone https://github.com/ato113/tidy
-cd tidy
+git clone https://github.com/ato113/foldersort
+cd foldersort
 pip install -e ".[dev]"
 pytest
 ```
@@ -26,7 +26,7 @@ If it fails on an OS you don't have, say so in the PR and we'll work it out toge
 
 ## Adding a rule condition
 
-Conditions live in `Rule` in `src/tidy/rules.py`. Each one is optional and ANDs with
+Conditions live in `Rule` in `src/foldersort/rules.py`. Each one is optional and ANDs with
 the others. To add one:
 
 1. Add the field to the `Rule` dataclass and parse it in `Rule.from_dict`.
@@ -37,7 +37,7 @@ the others. To add one:
 ## Reporting a bug
 
 Tell us what you ran, what you expected, and what happened — ideally with the
-relevant part of your `tidy.yaml`. Your OS and `tidy --version` help too.
+relevant part of your `foldersort.yaml`. Your OS and `foldersort --version` help too.
 
 ## AI-assisted contributions
 
@@ -51,7 +51,7 @@ description can't trust the diff either.
 
 ## A note on scope
 
-tidy moves files according to rules you write. Things that fit: new conditions,
+foldersort moves files according to rules you write. Things that fit: new conditions,
 better output, more reliable undo. Things that don't: renaming file contents,
 syncing to cloud storage, or anything that needs a daemon. If you're unsure,
 open an issue before writing the code.
