@@ -25,8 +25,10 @@ Dry run — nothing was moved. Drop --dry-run to apply.
 ## Why another file organizer?
 
 Most of them hardcode the categories, so the moment your workflow differs from the
-author's you're out of luck. `tidy` has three things they usually miss:
+author's you're out of luck. `tidy` has four things they usually miss:
 
+- **It writes the rules for you.** `tidy suggest` looks at what's actually in the
+  folder and hands you a working config. No staring at a blank YAML file.
 - **Conditions combine.** A rule can match on extension *and* size *and* age at once —
   "PDFs larger than 50 MB that I haven't touched in six months" is one rule.
 - **Dry run by default in the docs.** You always see the plan before anything moves.
@@ -49,11 +51,33 @@ pip install -e .
 ## Quick start
 
 ```bash
-tidy init              # writes a sample tidy.yaml you can edit
-tidy run --dry-run     # see what would happen
-tidy run               # do it (asks for confirmation)
-tidy undo              # changed your mind
+tidy suggest ~/Downloads --write   # look at the folder, write a config for it
+tidy run --dry-run                 # see what would happen
+tidy run                           # do it (asks for confirmation)
+tidy undo                          # changed your mind
 ```
+
+Prefer to start from a blank slate? `tidy init` writes a commented sample config.
+
+### Let tidy write the rules
+
+`tidy suggest` scans a folder and proposes a rule for each group it finds — including
+one for screenshots, which it recognises by name in several languages.
+
+```
+$ tidy suggest ~/Downloads
+
+Found 6 rule(s) that would fit /home/you/Downloads:
+
+  Screenshots  (14 file(s))
+  Images       (31 file(s))
+  Documents    (22 file(s))
+  Archives     (5 file(s))
+  Audio        (9 file(s))
+  BLEND files  (3 file(s))
+```
+
+Add `--write` to save it as `tidy.yaml`. It's a normal config file — edit it freely.
 
 ## Configuration
 
@@ -89,6 +113,10 @@ rules:
 | `larger_than` / `smaller_than` | Size thresholds. | `500MB`, `10KB` |
 | `older_than` / `newer_than` | Age by last modification. | `90d`, `2w`, `1y` |
 
+Top-level options: `source`, `recursive`, `on_conflict` (`rename` / `skip` / `overwrite`)
+and `exclude` — a list of globs that are never touched, which is where half-finished
+downloads like `*.part` and `*.crdownload` belong.
+
 A file matches a rule only when **every** condition set on that rule is true.
 Conditions you leave out are ignored.
 
@@ -96,8 +124,10 @@ Conditions you leave out are ignored.
 
 - Hidden files (starting with `.`) are never touched.
 - Files already inside a target folder are left alone, so running twice is safe.
-- `tidy undo` reverses the most recent run only. The journal lives in
-  `~/.local/share/tidy/journal.jsonl`.
+- `tidy undo` reverses the most recent run only; `tidy undo --list` shows the history.
+  The journal lives in `~/.local/share/tidy/journal.jsonl`.
+- Output is coloured when you're at a terminal and plain when you pipe it.
+  `NO_COLOR=1` turns it off everywhere.
 
 ## Development
 
@@ -109,8 +139,11 @@ ruff check src tests
 
 ## Contributing
 
-Issues and pull requests are welcome. If you're adding a rule condition, please add a
-test for it in `tests/test_rules.py`.
+Issues and pull requests are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for the
+setup, the checklist, and how to add a new rule condition.
+
+AI-assisted contributions are fine as long as you disclose them in the pull request
+and can explain what you're submitting.
 
 ## License
 
