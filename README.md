@@ -2,7 +2,7 @@
 
 **Organize a folder with rules you can read.**
 
-[![CI](https://github.com/ato113/tidy/actions/workflows/ci.yml/badge.svg)](https://github.com/ato113/tidy/actions/workflows/ci.yml)
+[![CI](https://github.com/ato113/foldersort/actions/workflows/ci.yml/badge.svg)](https://github.com/ato113/foldersort/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -45,8 +45,8 @@ The command is `foldersort`, and `fsort` is a shorter alias for it.
 Or from source:
 
 ```bash
-git clone https://github.com/ato113/tidy
-cd tidy
+git clone https://github.com/ato113/foldersort
+cd foldersort
 pip install -e .
 ```
 

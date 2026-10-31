@@ -37,6 +37,6 @@ All notable changes to this project are documented here. The format follows
 - `foldersort init` writes a sample config.
 - Conflict policies: rename, skip, overwrite.
 
-[Unreleased]: https://github.com/ato113/tidy/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/ato113/tidy/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/ato113/tidy/releases/tag/v0.1.0
+[Unreleased]: https://github.com/ato113/foldersort/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/ato113/foldersort/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/ato113/foldersort/releases/tag/v0.1.0

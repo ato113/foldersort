@@ -5,8 +5,8 @@ Thanks for taking the time to help. Issues and pull requests are both welcome.
 ## Getting set up
 
 ```bash
-git clone https://github.com/ato113/tidy
-cd tidy
+git clone https://github.com/ato113/foldersort
+cd foldersort
 pip install -e ".[dev]"
 pytest
 ```
