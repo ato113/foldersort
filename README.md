@@ -1,5 +1,7 @@
 # foldersort
 
+*[Türkçe](README.tr.md) · English*
+
 **Organize a folder with rules you can read.**
 
 [![CI](https://github.com/ato113/foldersort/actions/workflows/ci.yml/badge.svg)](https://github.com/ato113/foldersort/actions/workflows/ci.yml)
@@ -36,19 +38,41 @@ author's you're out of luck. `foldersort` has four things they usually miss:
 
 ## Install
 
+You need Python 3.9 or newer. Check what you have:
+
 ```bash
-pip install foldersort
+python3 --version
 ```
 
-The command is `foldersort`, and `fsort` is a shorter alias for it.
-
-Or from source:
+Then install from source:
 
 ```bash
 git clone https://github.com/ato113/foldersort
 cd foldersort
 pip install -e .
 ```
+
+Confirm it worked:
+
+```bash
+foldersort --version
+```
+
+The command is `foldersort`, and `fsort` is a shorter alias — use whichever you
+prefer.
+
+<details>
+<summary>If the command isn't found after installing</summary>
+
+`pip` installed it somewhere that isn't on your `PATH`. Two ways around it:
+
+```bash
+python3 -m foldersort --version     # always works
+```
+
+or add pip's script directory to your `PATH` — `pip show -f foldersort` tells
+you where it went.
+</details>
 
 ## Quick start
 
