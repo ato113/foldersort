@@ -26,9 +26,9 @@ dependencies = ["PyYAML>=6.0"]
 dev = ["pytest>=7.0", "ruff>=0.4"]
 
 [project.urls]
-Homepage = "https://github.com/ato113/foldersort"
-Issues = "https://github.com/ato113/foldersort/issues"
-Changelog = "https://github.com/ato113/foldersort/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/ato113/tidy"
+Issues = "https://github.com/ato113/tidy/issues"
+Changelog = "https://github.com/ato113/tidy/blob/main/CHANGELOG.md"
 
 [project.scripts]
 foldersort = "foldersort.cli:main"
